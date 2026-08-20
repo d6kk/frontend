@@ -1,0 +1,183 @@
+:root {
+  --bg: #0a1420;
+  --panel: #101c2c;
+  --panel-2: #0d1826;
+  --border: #1e2f45;
+  --text: #e6ebf2;
+  --muted: #7688a0;
+  --accent: #f2a93b;
+  --ok: #4fd1c5;
+  --err: #ef6461;
+  --mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 36px 20px 60px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin: 0 0 20px;
+}
+
+/* --- Signature: the relay diagram --- */
+.relay {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.node {
+  flex: 0 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-align: center;
+  min-width: 128px;
+}
+
+.node-label {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.node-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+.node-sub.ok { color: var(--ok); }
+.node-sub.err { color: var(--err); }
+
+.wire {
+  position: relative;
+  flex: 1 1 auto;
+  height: 2px;
+  background: var(--border);
+  min-width: 30px;
+}
+
+.packet {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.packet.fire { animation: travel 0.7s ease-in-out; }
+.packet.back { animation: travel-back 0.7s ease-in-out; }
+
+@keyframes travel {
+  0% { left: 0; opacity: 1; }
+  100% { left: calc(100% - 8px); opacity: 1; }
+}
+@keyframes travel-back {
+  0% { left: calc(100% - 8px); opacity: 1; }
+  100% { left: 0; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .packet.fire, .packet.back { animation: none; }
+}
+
+/* --- Panels --- */
+.panel {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.panel-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+.panel-label #count { color: var(--accent); }
+
+form { display: flex; flex-direction: column; gap: 10px; }
+
+input, textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+button {
+  background: var(--accent);
+  color: #14100a;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+}
+button:hover { opacity: 0.9; }
+button:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+
+.messages { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; }
+
+.message {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.message strong { font-size: 14px; }
+.message p { margin: 6px 0; font-size: 14px; }
+.message time { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+.hint { color: var(--muted); font-size: 13px; }
+
+footer {
+  margin-top: 26px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+footer .arrow { color: var(--accent); }
+
+@media (max-width: 420px) {
+  .relay { flex-direction: column; }
+  .wire { width: 2px; height: 30px; min-width: 0; }
+  .packet { left: 50%; top: 0; margin-top: 0; margin-left: -4px; }
+  @keyframes travel { 0% { top: 0; } 100% { top: calc(100% - 8px); } }
+  @keyframes travel-back { 0% { top: calc(100% - 8px); } 100% { top: 0; } }
+}

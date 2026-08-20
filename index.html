@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontend + Backend Demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">LIVE DEMO — REQUEST / RESPONSE</p>
+
+    <div class="relay" aria-label="Frontend backend request flow">
+      <div class="node">
+        <p class="node-label">FRONTEND</p>
+        <p class="node-sub">HTML · CSS · JS</p>
+      </div>
+      <div class="wire">
+        <span class="packet" id="packet"></span>
+      </div>
+      <div class="node">
+        <p class="node-label">BACKEND</p>
+        <p class="node-sub" id="backendSub">connecting…</p>
+      </div>
+    </div>
+
+    <main>
+      <section class="panel">
+        <p class="panel-label">Guestbook — POST /api/messages</p>
+        <form id="msgForm">
+          <input type="text" id="nameInput" placeholder="Naam" required>
+          <textarea id="msgInput" placeholder="Message likhein…" rows="2" required></textarea>
+          <button type="submit">Bhejein</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <p class="panel-label">Messages — GET /api/messages <span id="count"></span></p>
+        <div id="messages" class="messages">
+          <p class="hint">Load ho raha hai…</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>index.html + style.css + script.js <span class="arrow">→</span> fetch() <span class="arrow">→</span> server.js (Express)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
