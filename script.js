@@ -1,6 +1,6 @@
 // Backend ka address -- deploy karne ke baad ise apne live API URL se replace karein
 // e.g. const API_URL = 'https://api.yourdomain.dpdns.org';
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://backend-wkw9.onrender.com';
 
 const backendSub = document.getElementById('backendSub');
 const packet = document.getElementById('packet');
